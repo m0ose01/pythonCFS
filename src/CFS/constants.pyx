@@ -18,3 +18,18 @@ cpdef enum CFSFlag:
     flag_9 = api.FLAG9
     flag_8 = api.FLAG8
     no_flags = api.noFlags
+
+cpdef enum CFSDataKind:
+    equalspaced = api.EQUALSPACED
+    matrix = api.MATRIX
+    subsidiary = api.SUBSIDIARY
+
+cpdef enum CFSDataType:
+    int_1 = api.INT1 
+    int_2 = api.INT2
+    word_1 = api.WRD1
+    word_2 = api.WRD2
+    int_4 = api.INT4
+    real_4 = api.RL4
+    real_8 = api.RL8
+    string = api.LSTR

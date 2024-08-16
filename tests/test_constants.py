@@ -1,4 +1,4 @@
-from CFS.api import CFSFlag
+from CFS.constants import CFSFlag, CFSDataType, CFSDataKind
 
 def test_cfs_flags():
     assert CFSFlag.flag_7 == 1
@@ -18,3 +18,18 @@ def test_cfs_flags():
     assert CFSFlag.flag_9 == 16384
     assert CFSFlag.flag_8 == 32768
     assert CFSFlag.no_flags == 0
+
+def test_data_kind():
+    assert CFSDataKind.equalspaced == 0
+    assert CFSDataKind.matrix == 1
+    assert CFSDataKind.subsidiary == 2
+
+def test_data_types():
+    assert CFSDataType.int_1 == 0
+    assert CFSDataType.word_1 == 1
+    assert CFSDataType.int_2 == 2
+    assert CFSDataType.word_2 == 3
+    assert CFSDataType.int_4 == 4
+    assert CFSDataType.real_4 == 5
+    assert CFSDataType.real_8 == 6
+    assert CFSDataType.string == 7
