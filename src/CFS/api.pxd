@@ -79,12 +79,12 @@ cdef extern from "cfsapi.h":
     # TODO: Implement these functions
     cfs_short CloseCFSFile(cfs_short handle);
     cfs_short OpenCFSFile(TpStr fName, cfs_short enableWr, cfs_short memTable);
-    GetGenInfo(cfs_short handle, TpStr time, TpStr date, TpStr comment);
-    GetFileInfo(cfs_short handle, TpShort channels, TpShort fileVars, TpShort DSVars, TpUShort dataSects);
-    GetVarDesc(cfs_short handle, cfs_short varNo, cfs_short varKind, TpShort varSize, TpDType varType, TpStr units, TpStr about);
-    GetVarVal(cfs_short handle, cfs_short varNo, cfs_short vaKind, WORD dataSect, TpVoid varADS);
-    GetFileChan(cfs_short handle, cfs_short channel, TpStr chanName, TpStr yUnits, TpStr xUnits, TpDType dataType, TpDKind dataKind, TpShort spacing, TpShort other);
-    GetDSChan(cfs_short handle, cfs_short channel, WORD dataSect, TpLong chOffset, TpLong points, TpFloat yScale, TpFloat yOffset, TpFloat xScale, TpFloat xOffset);
+    void GetGenInfo(cfs_short handle, TpStr time, TpStr date, TpStr comment);
+    void GetFileInfo(cfs_short handle, TpShort channels, TpShort fileVars, TpShort DSVars, TpUShort dataSects);
+    void GetVarDesc(cfs_short handle, cfs_short varNo, cfs_short varKind, TpShort varSize, TpDType varType, TpStr units, TpStr about);
+    void GetVarVal(cfs_short handle, cfs_short varNo, cfs_short vaKind, WORD dataSect, TpVoid varADS);
+    void GetFileChan(cfs_short handle, cfs_short channel, TpStr chanName, TpStr yUnits, TpStr xUnits, TpDType dataType, TpDKind dataKind, TpShort spacing, TpShort other);
+    void GetDSChan(cfs_short handle, cfs_short channel, WORD dataSect, TpLong chOffset, TpLong points, TpFloat yScale, TpFloat yOffset, TpFloat xScale, TpFloat xOffset);
     WORD GetChanData(cfs_short handle, cfs_short channel, WORD dataSect, cfs_long pointOff, WORD points, TpVoid dataADS, cfs_long areaSize);
     cfs_long CFSFileSize(cfs_short handle);
     cfs_long GetDSSize(cfs_short handle, WORD dataSect);
