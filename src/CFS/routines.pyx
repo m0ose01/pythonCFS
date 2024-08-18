@@ -71,8 +71,15 @@ def get_ds_chan(handle: api.cfs_short, channel: api.cfs_short, data_section: api
     return (channel_offset, points, y_scale, y_offset, x_scale, x_offset)
 
 @cython.ccall
-def get_chan_data(handle: api.cfs_short, channel: api.cfs_short, data_section: api.WORD, point_offset: api.cfs_long, points_to_read: api.WORD) -> array.array:
-    cdef array.array array_template = array.array('h', [])
+def get_chan_data(handle: api.cfs_short, channel: api.cfs_short, data_section: api.WORD, point_offset: api.cfs_long, points_to_read: api.WORD, data_type: CFSDataType) -> array.array:
+    array_type = ''
+    if data_type == CFSDataType.int_2:
+        array_type = 'h'
+    elif data_type == CFSDataType.real_4:
+        array_type = 'f'
+    else:
+        raise NotImplementedError("Support for types other than Int16 or Float32 is not implemented.")
+    cdef array.array array_template = array.array(array_type, [])
     cdef array.array data
     data = array.clone(array_template, points_to_read, zero=True)
     size_of_short_bytes = 2
