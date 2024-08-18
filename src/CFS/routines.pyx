@@ -82,7 +82,7 @@ def get_chan_data(handle: api.cfs_short, channel: api.cfs_short, data_section: a
     cdef array.array array_template = array.array(array_type, [])
     cdef array.array data
     data = array.clone(array_template, points_to_read, zero=True)
-    size_of_short_bytes = 2
-    area_size = points_to_read * size_of_short_bytes
+    size_of_element_bytes = data.itemsize
+    area_size = points_to_read * size_of_element_bytes
     api.GetChanData(handle, channel, data_section, point_offset, points_to_read, data.data.as_voidptr, area_size)
     return data
