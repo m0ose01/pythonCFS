@@ -1,7 +1,6 @@
 name: Build Wheels
 
 on: [release]
-  types: [created, edited]
 
 jobs:
   build_wheels:
