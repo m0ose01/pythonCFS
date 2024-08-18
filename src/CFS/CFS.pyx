@@ -26,8 +26,8 @@ def load_cfs(filename: bytes) -> list[array.array]:
     for current_channel in range(channel_count):
         current_channel_name, current_y_units, current_x_units, current_data_type, current_data_kind, spacing, other = routines.get_file_chan(file_handle, current_channel)
         print(current_channel_name)
+        current_data_section: cython.int = 0
         for current_data_section in range(data_section_count):
-            current_data_section: cython.int = 0
 
             _, points, current_y_scale, current_y_offset, current_x_scale, current_x_offset = routines.get_ds_chan(file_handle, current_channel, current_data_section)
 
