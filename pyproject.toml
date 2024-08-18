@@ -1,6 +1,6 @@
 [project]
 name = "CFS"
-version = "0.1.0dev1"
+version = "0.1.0"
 description = "Python wrapper for the Cambridge Electronic Design CFS library."
 authors = [
 	{name = "Seamus", email = "<m0ose01@proton.me>"}
