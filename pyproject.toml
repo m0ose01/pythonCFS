@@ -6,6 +6,7 @@ authors = [
 	{name = "Seamus", email = "<m0ose01@proton.me>"}
 ]
 readme = "README.md"
+license = {file = "LICENSE.txt"}
 requires-python = ">=3.10"
 
 [project.optional-dependencies]
