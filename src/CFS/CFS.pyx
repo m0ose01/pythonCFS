@@ -4,8 +4,8 @@ import array
 import cython
 from cython.cimports.cpython import array
 
-# @cython.ccall
-def load_cfs(filename: bytes):
+@cython.ccall
+def load_cfs(filename: bytes) -> list[array.array]:
     file_handle = routines.open_cfs_file(filename)
     print(file_handle)
 
@@ -33,9 +33,8 @@ def load_cfs(filename: bytes):
 
             assert current_data_type == constants.CFSDataType.int_2
 
-            data = routines.get_chan_data(file_handle, current_channel, current_data_section, 0, points)
-            current_point: cython.int = 0
-            for current_point in range(points):
-                print(data[current_point])
+            current_data = routines.get_chan_data(file_handle, current_channel, current_data_section, 0, points)
+            data.append(current_data)
 
     routines.close_cfs_file(file_handle)
+    return data
