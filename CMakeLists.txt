@@ -12,7 +12,7 @@ find_package(
 	)
 
 
-list(APPEND python_modules constants routines CFS)
+list(APPEND python_modules _constants _routines CFSFile)
 foreach(current_module_name IN LISTS python_modules)
 set(cfsapi_path "src/CFS/${current_module_name}")
 

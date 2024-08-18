@@ -1,4 +1,4 @@
-from CFS.constants import CFSFlag, CFSDataType, CFSDataKind
+from CFS._constants import CFSFlag, CFSDataType, CFSDataKind
 
 def test_cfs_flags():
     assert CFSFlag.flag_7 == 1

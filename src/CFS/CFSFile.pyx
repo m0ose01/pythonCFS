@@ -1,4 +1,4 @@
-from CFS import routines, constants
+from CFS import _routines, _constants
 from pathlib import Path
 import array
 import cython
@@ -15,16 +15,16 @@ class CFSFile:
     file_variables = cython.declare(list, visibility = 'readonly')
 
     def __init__(self, filename: bytes):
-        file_handle = routines.open_cfs_file(filename)
-        channel_count, file_variable_count, data_section_variable_count, data_section_count = routines.get_file_info(file_handle)
-        self.time, self.date, self.comment = routines.get_gen_info(file_handle)
+        file_handle = _routines.open_cfs_file(filename)
+        channel_count, file_variable_count, data_section_variable_count, data_section_count = _routines.get_file_info(file_handle)
+        self.time, self.date, self.comment = _routines.get_gen_info(file_handle)
 
         self.channel_info = []
         self.channel_data = []
 
         current_channel: cython.int = 0
         for current_channel in range(channel_count):
-            current_channel_name, current_y_units, current_x_units, current_data_type, current_data_kind, spacing, other = routines.get_file_chan(file_handle, current_channel)
+            current_channel_name, current_y_units, current_x_units, current_data_type, current_data_kind, spacing, other = _routines.get_file_chan(file_handle, current_channel)
             current_channel_info = {
                     "name": current_channel_name,
                     "y_units": current_y_units,
@@ -37,9 +37,9 @@ class CFSFile:
             current_data_section: cython.int = 0
             for current_data_section in range(data_section_count):
 
-                _, points, current_y_scale, current_y_offset, current_x_scale, current_x_offset = routines.get_ds_chan(file_handle, current_channel, current_data_section)
+                _, points, current_y_scale, current_y_offset, current_x_scale, current_x_offset = _routines.get_ds_chan(file_handle, current_channel, current_data_section)
 
-                current_data = routines.get_chan_data(file_handle, current_channel, current_data_section, 0, points, current_data_type)
+                current_data = _routines.get_chan_data(file_handle, current_channel, current_data_section, 0, points, current_data_type)
 
                 float_array_template = cython.declare(array.array, array.array('f', []))
                 cython.declare(current_scaled_data = array.array)
@@ -49,4 +49,4 @@ class CFSFile:
                     current_scaled_data[current_point] = (current_data[current_point] + current_y_offset) * current_y_scale
                 self.channel_data[current_channel].append(current_scaled_data)
 
-        routines.close_cfs_file(file_handle)
+        _routines.close_cfs_file(file_handle)

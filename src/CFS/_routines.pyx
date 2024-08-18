@@ -1,6 +1,6 @@
 import array
 import cython
-from CFS.constants import CFSDataType, CFSDataKind
+from CFS._constants import CFSDataType, CFSDataKind
 from cython.cimports.CFS import api
 from cython.cimports.cpython import array
 
