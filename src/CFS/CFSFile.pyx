@@ -1,5 +1,6 @@
 from CFS import _routines, _constants
 from pathlib import Path
+from os import fsencode
 import array
 import cython
 from cython.cimports.cpython import array
@@ -14,8 +15,10 @@ class CFSFile:
     channel_info = cython.declare(list[dict], visibility = 'readonly')
     file_variables = cython.declare(list, visibility = 'readonly')
 
-    def __init__(self, filename: bytes):
-        file_handle = _routines.open_cfs_file(filename)
+    def __init__(self, filename: Path):
+        if not filename.exists():
+            raise FileNotFoundError
+        file_handle = _routines.open_cfs_file(fsencode(filename))
         channel_count, file_variable_count, data_section_variable_count, data_section_count = _routines.get_file_info(file_handle)
         self.time, self.date, self.comment = _routines.get_gen_info(file_handle)
 

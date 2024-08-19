@@ -2,7 +2,7 @@ from CFS.CFSFile import CFSFile
 from pathlib import Path
 
 TEST_FILENAME = Path(__file__).parent.joinpath("test_data/test_file.cfs")
-TEST_FILE = CFSFile(bytes(TEST_FILENAME))
+TEST_FILE = CFSFile(TEST_FILENAME)
 
 def test_file_info():
     assert TEST_FILE.date == b"10/08/24"
