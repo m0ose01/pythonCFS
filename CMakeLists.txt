@@ -6,6 +6,7 @@ project(
 	)
 
 set(C_LIB_PATH "extern/CFS")
+set(IMPORT_NAME "CFS")
 add_subdirectory("${C_LIB_PATH}")
 set_property(TARGET cfsapi_static PROPERTY POSITION_INDEPENDENT_CODE ON)
 
@@ -30,5 +31,5 @@ set(cfsapi_path "src/CFS/${current_module_name}")
 	python_add_library(${current_module_name} MODULE ${cfsapi_path}.c WITH_SOABI)
 	target_link_libraries(${current_module_name} PUBLIC cfsapi_static)
 
-	install(TARGETS ${current_module_name} DESTINATION ${SKBUILD_PROJECT_NAME})
+	install(TARGETS ${current_module_name} DESTINATION ${IMPORT_NAME})
 endforeach()
