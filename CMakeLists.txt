@@ -1,5 +1,9 @@
 cmake_minimum_required(VERSION 3.22)
-project(${SKBUILD_PROJECT_NAME} LANGUAGES C)
+project(
+	${SKBUILD_PROJECT_NAME}
+	VERSION ${SKBUILD_PROJECT_VERSION}
+	LANGUAGES C
+	)
 
 set(C_LIB_PATH "extern/CFS")
 add_subdirectory("${C_LIB_PATH}")
