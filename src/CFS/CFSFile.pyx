@@ -10,7 +10,7 @@ class CFSFile:
     time = cython.declare(bytes, visibility = 'readonly')
     comment = cython.declare(bytes, visibility = 'readonly')
 
-    channel_data = cython.declare(list[list], visibility = 'readonly')
+    channel_data = cython.declare(list[list[array.array]], visibility = 'readonly')
     channel_info = cython.declare(list[dict], visibility = 'readonly')
     file_variables = cython.declare(list, visibility = 'readonly')
 
