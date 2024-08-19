@@ -25,3 +25,5 @@ write_to = "src/CFS/_version.py"
 
 [tool.cibuildwheel]
 build-frontend = "build"
+test-extras = "dev"
+test-command = "pytest {project}/tests"
