@@ -1,5 +1,5 @@
 [project]
-name = "CFS"
+name = "pythonCFS"
 dynamic = ["version"]
 description = "Python wrapper for the Cambridge Electronic Design CFS library."
 authors = [
