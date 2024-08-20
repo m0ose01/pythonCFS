@@ -1,4 +1,5 @@
 import array
+import pathlib
 
 class CFSFile:
     time: bytes
@@ -8,4 +9,4 @@ class CFSFile:
     channel_data: list[list[array.array]]
     channel_info: list[dict]
 
-    def __init__(self, filename: bytes) -> None: ...
+    def __init__(self, filename: pathlib.Path) -> None: ...
