@@ -1,4 +1,4 @@
-from cython.cimports.CFS import api
+from CFS cimport api
 
 cpdef enum CFSFlag:
     flag_7 = api.FLAG7

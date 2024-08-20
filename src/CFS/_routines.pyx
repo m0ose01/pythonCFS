@@ -4,19 +4,16 @@ from CFS._constants import CFSDataType, CFSDataKind
 from cython.cimports.CFS import api
 from cython.cimports.cpython import array
 
-@cython.ccall
-def open_cfs_file(filename: cython.p_char) -> api.cfs_short:
+cpdef (api.cfs_short) open_cfs_file(filename: cython.p_char):
     handle = api.OpenCFSFile(filename, 0, 1)
     if handle < 0:
         raise Exception("Invalid File Handle")
     return handle
 
-@cython.ccall
-def close_cfs_file(handle: api.cfs_short):
+cpdef close_cfs_file(handle: api.cfs_short):
     api.CloseCFSFile(handle)
 
-@cython.ccall
-def get_gen_info(handle: api.cfs_short) -> tuple[str, str, str]:
+cpdef tuple[str, str, str] get_gen_info(handle: api.cfs_short):
     cdef char[9] c_time
     cdef char[9] c_date
     cdef char[73] c_comment
@@ -28,8 +25,7 @@ def get_gen_info(handle: api.cfs_short) -> tuple[str, str, str]:
 
     return (time, date, comment)
 
-@cython.ccall
-def get_file_info(handle: api.cfs_short) -> tuple[int, int, int, int]:
+cpdef tuple[int, int, int, int] get_file_info(handle: api.cfs_short):
     channels: api.cfs_short = 0
     file_vars: api.cfs_short = 0
     data_section_vars: api.cfs_short = 0
@@ -39,8 +35,7 @@ def get_file_info(handle: api.cfs_short) -> tuple[int, int, int, int]:
 
     return (channels, file_vars, data_section_vars, data_sections)
 
-@cython.ccall
-def get_file_chan(handle: api.cfs_short, channel: api.cfs_short) -> tuple[str, str, str, CFSDataType, CFSDataKind, int, int]:
+cpdef tuple[str, str, str, CFSDataType, CFSDataKind, int, int] get_file_chan(handle: api.cfs_short, channel: api.cfs_short):
     cdef char[21] c_channel_name
     cdef char[9] c_y_units
     cdef char[9] c_x_units
@@ -57,8 +52,7 @@ def get_file_chan(handle: api.cfs_short, channel: api.cfs_short) -> tuple[str, s
 
     return (channel_name, y_units, x_units, CFSDataType(data_type), CFSDataKind(data_kind), spacing, other)
 
-@cython.ccall
-def get_ds_chan(handle: api.cfs_short, channel: api.cfs_short, data_section: api.WORD) -> tuple[api.cfs_long, api.cfs_long, float, float, float, float]:
+cpdef tuple[api.cfs_long, api.cfs_long, float, float, float, float] get_ds_chan(handle: api.cfs_short, channel: api.cfs_short, data_section: api.WORD):
     channel_offset: api.cfs_long
     points: api.cfs_long = 0
     cdef float y_scale
@@ -70,8 +64,7 @@ def get_ds_chan(handle: api.cfs_short, channel: api.cfs_short, data_section: api
 
     return (channel_offset, points, y_scale, y_offset, x_scale, x_offset)
 
-@cython.ccall
-def get_chan_data(handle: api.cfs_short, channel: api.cfs_short, data_section: api.WORD, point_offset: api.cfs_long, points_to_read: api.WORD, data_type: CFSDataType) -> array.array:
+cpdef array.array get_chan_data(handle: api.cfs_short, channel: api.cfs_short, data_section: api.WORD, point_offset: api.cfs_long, points_to_read: api.WORD, data_type: CFSDataType):
     array_type = ''
     if data_type == CFSDataType.int_2:
         array_type = 'h'
@@ -83,6 +76,6 @@ def get_chan_data(handle: api.cfs_short, channel: api.cfs_short, data_section: a
     cdef array.array data
     data = array.clone(array_template, points_to_read, zero=True)
     size_of_element_bytes = data.itemsize
-    area_size = points_to_read * size_of_element_bytes
+    cdef (api.cfs_long) area_size = points_to_read * size_of_element_bytes
     api.GetChanData(handle, channel, data_section, point_offset, points_to_read, data.data.as_voidptr, area_size)
     return data
