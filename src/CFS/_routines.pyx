@@ -4,8 +4,10 @@ from CFS._constants import CFSDataType, CFSDataKind
 from cython.cimports.CFS import api
 from cython.cimports.cpython import array
 
-cpdef (api.cfs_short) open_cfs_file(filename: cython.p_char):
-    handle = api.OpenCFSFile(filename, 0, 1)
+cpdef (api.cfs_short) open_cfs_file(filename: str):
+    filename_bytes = filename.encode("ascii")
+    cdef char *filename_c = filename_bytes
+    handle = api.OpenCFSFile(filename_c, 0, 1)
     if handle < 0:
         raise Exception("Invalid File Handle")
     return handle

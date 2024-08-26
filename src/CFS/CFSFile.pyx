@@ -18,7 +18,7 @@ cdef class CFSFile:
     def __init__(self, filename: Path):
         if not filename.exists():
             raise FileNotFoundError
-        file_handle = _routines.open_cfs_file(fsencode(filename))
+        file_handle = _routines.open_cfs_file(str(filename))
         channel_count, file_variable_count, data_section_variable_count, data_section_count = _routines.get_file_info(file_handle)
         self.time, self.date, self.comment = _routines.get_gen_info(file_handle)
 
