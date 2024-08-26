@@ -8,6 +8,13 @@ authors = [
 readme = "README.md"
 license = {file = "LICENSE.txt"}
 requires-python = ">=3.10"
+classifiers = [
+	"Intended Audience :: Science/Research",
+	"Programming Language :: C",
+	"Programming Language :: Cython",
+	"Programming Language :: Python",
+	"License :: OSI Approved :: MIT License",
+]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.3.2", "build>=1.2.1"]

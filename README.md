@@ -9,9 +9,12 @@ This is a Python wrapper for my [other project](https://github.com/m0ose01/CFS),
 
 ## Installation
 
-Currently, pythonCFS is not available on PyPI.
-As an alternative, you can download wheels directly from the [releases](https://github.com/m0ose01/pythonCFS/releases) page.
-You will have to read the wheel's filename to determine the correct wheel for your system.
+Download the latest release of pythonCFS using pip:
+```
+pip install pythonCFS
+```
+
+If you have problems installing pythonCFS, file an [issue](https://github.com/m0ose01/pythonCFS/issues).
 
 ## Example Usage
 
@@ -19,11 +22,13 @@ This script loads a CFS file, `my_cfs_file.cfs`, and plots a single data section
 
 ```python
 from CFS.CFSFile import CFSFile
+from pathlib import Path
 import matplotlib.pyplot as plt
 
 def main():
     # Load a CFS file by creating an instance of the 'CFS' class.
-    data = CFSFile(b"./my_cfs_file.cfs")
+    file = Path("./my_cfs_file.cfs")
+    data = CFSFile(file)
 
     channel = 0
     data_section = 0
